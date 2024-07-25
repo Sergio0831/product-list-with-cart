@@ -1,0 +1,64 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  @font-face {
+    font-family: 'Red Hat Text';
+    font-style: normal;
+    font-weight: 400 600 700;
+    font-display: swap;
+    src: url(/fonts/RedHatText-VariableFont_wght.woff2) format('woff2');
+  }
+
+  :root {
+    /* Font Family */
+    --font-base: 'Red Hat Text';
+
+    /* Colors */
+    --black: hsl(0, 0%, 0%);
+    --white: hsl(0, 0%, 100%);
+    --red: hsl(14, 86%, 42%);
+    --dark-red: hsl(14, 86%, 31%);
+    --green: hsl(159, 69%, 38%);
+    --rose-50: hsl(20, 50%, 98%);
+    --rose-100: hsl(13, 31%, 94%);
+    --rose-300: hsl(14, 25%, 72%);
+    --rose-400: hsl(7, 20%, 60%);
+    --rose-500: hsl(12, 20%, 44%);
+    --rose-900: hsl(14, 65%, 9%);
+
+    --background: var(var(--rose-50));
+    --ring: var(--red);
+  }
+
+  html {
+    font-family: var(--font-base), system-ui, sans-serif;
+  }
+
+  body {
+    @apply bg-rose-50 text-base;
+  }
+}
+
+@layer utilities {
+  .text-preset-1 {
+    @apply text-[2.5rem]/[120%] font-bold text-rose-900;
+  }
+
+  .text-preset-2 {
+    @apply text-2xl/[125%] font-bold;
+  }
+
+  .text-preset-3 {
+    @apply font-semibold;
+  }
+
+  .text-preset-4 {
+    @apply text-sm;
+  }
+
+  .text-preset-4-bold {
+    @apply font-semibold;
+  }
+}
