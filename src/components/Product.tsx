@@ -4,22 +4,16 @@ import useCartStore from '../store/cart';
 import Button from './Button';
 import AddToCart from './Icons/AddToCart';
 import QuantityButton from './QuantityButton';
+import { ProductTypes } from '../types';
 
 export interface ProductProps extends Omit<React.ComponentPropsWithoutRef<'article'>, 'id'> {
-  image: {
-    thumbnail: string;
-    mobile: string;
-    tablet: string;
-    desktop: string;
-  };
-  id: number;
-  name: string;
-  category: string;
-  price: number;
+  product: ProductTypes;
 }
 
-const Product = ({ id, image, name, category, price, className }: ProductProps) => {
+const Product = ({ product, className }: ProductProps) => {
   const { addItemToCart, itemExist } = useCartStore();
+  const { id, image, name, category, price } = product;
+
   const productToCart = {
     id,
     name,
@@ -41,7 +35,7 @@ const Product = ({ id, image, name, category, price, className }: ProductProps) 
         <img src={image.mobile} alt={name} loading="lazy" className="rounded-lg" />
       </picture>
       {itemExist(id) ? (
-        <QuantityButton className="w-40 gap-x-2 justify-self-center -mt-6 mb-4" />
+        <QuantityButton productId={id} className="w-40 gap-x-2 justify-self-center -mt-6 mb-4" />
       ) : (
         <Button
           variant="outline"
@@ -54,7 +48,7 @@ const Product = ({ id, image, name, category, price, className }: ProductProps) 
       )}
       <div>
         <h2 className="text-preset-4 text-rose-500">{category}</h2>
-        <h3 className="text-preset-3 my-1">{name}</h3>
+        <h3 className="text-preset-3 my-1 text-rose-900">{name}</h3>
         <span className="text-preset-3 text-red">&euro;{price.toFixed(2)}</span>
       </div>
     </article>

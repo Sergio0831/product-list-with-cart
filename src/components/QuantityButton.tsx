@@ -1,11 +1,16 @@
 import { cn } from '../lib/utils';
+import useCartStore from '../store/cart';
 import Button from './Button';
 import Decrement from './Icons/Decrement';
 import Increment from './Icons/Increment';
 
-export interface QuantityButtonProps extends React.ComponentPropsWithoutRef<'div'> {}
+export interface QuantityButtonProps extends React.ComponentPropsWithoutRef<'div'> {
+  productId: number;
+}
 
-const QuantityButton = ({ className, ...props }: QuantityButtonProps) => {
+const QuantityButton = ({ productId, className, ...props }: QuantityButtonProps) => {
+  const { increaseQuantity, decreaseQuantity } = useCartStore();
+
   return (
     <div
       className={cn(
@@ -13,11 +18,19 @@ const QuantityButton = ({ className, ...props }: QuantityButtonProps) => {
         className,
       )}
       {...props}>
-      <Button variant="icon" size="icon">
+      <Button
+        variant="icon"
+        size="icon"
+        className="border-white"
+        onClick={() => decreaseQuantity(productId)}>
         <Decrement />
       </Button>
       1
-      <Button variant="icon" size="icon">
+      <Button
+        variant="icon"
+        size="icon"
+        className="border-white"
+        onClick={() => increaseQuantity(productId)}>
         <Increment />
       </Button>
     </div>

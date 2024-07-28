@@ -9,7 +9,7 @@ const buttonVariants = cva(
         primary: 'text-preset-3 text-white bg-red hover:bg-dark-red',
         outline:
           'text-preset-4-bold bg-white text-rose-900 border-2 border-rose-400 hover:text-red hover:border-red',
-        icon: 'border-2 border-inherit',
+        icon: 'border-2',
       },
       size: {
         primary: 'py-4 px-6',

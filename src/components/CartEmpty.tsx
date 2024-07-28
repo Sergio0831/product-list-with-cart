@@ -1,6 +1,10 @@
-const CartEmpty = () => {
+import { cn } from '../lib/utils';
+
+export interface CartEmptyProps extends React.ComponentPropsWithoutRef<'div'> {}
+
+const CartEmpty = ({ className, ...props }: CartEmptyProps) => {
   return (
-    <div className="grid gap-y-4 justify-center">
+    <div className={cn('grid gap-y-4 justify-center', className)} {...props}>
       <img
         src="/images/illustration-empty-cart.svg"
         alt="Cake illustration"
