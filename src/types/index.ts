@@ -13,4 +13,5 @@ export type ProductTypes = {
 
 export type CartProductTypes = Pick<ProductTypes, 'id' | 'name' | 'price'> & {
   thumbnail: string;
+  quantity: number;
 };

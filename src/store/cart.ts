@@ -1,83 +1,101 @@
 import { create } from 'zustand';
+import { persist } from 'zustand/middleware';
+import { CartProductTypes } from '../types';
+import { updatedCartItems } from '../lib/utils';
 
-export type CartProductTypes = {
-  id: number;
-  name: string;
-  thumbnail: string;
-  price: number;
-  quantity: number;
-};
-
-const updatedCartItems = (
-  cartItems: CartProductTypes[],
-  updatedItem: CartProductTypes,
-): CartProductTypes[] => {
-  const itemIndex = cartItems.findIndex((item) => item.id === updatedItem.id);
-
-  if (itemIndex > -1) {
-    cartItems[itemIndex] = updatedItem;
-  } else {
-    cartItems.push(updatedItem);
-  }
-
-  return [...cartItems];
-};
-
-export interface CartState {
+type CartState = {
   cartItems: CartProductTypes[];
+};
+
+type CartActions = {
   itemExist: (id: number) => CartProductTypes | undefined;
   addItemToCart: (item: CartProductTypes) => void;
   increaseQuantity: (productId: number) => void;
   decreaseQuantity: (productId: number) => void;
   removeItemFromCart: (productId: number) => void;
-}
+  getProductQuantity: (productId: number) => number;
+  totalAmount: () => number;
+  clearCart: () => void;
+};
 
-const useCartStore = create<CartState>((set, get) => ({
+const cartInitialState: CartState = {
   cartItems: [],
+};
 
-  itemExist: (id) => get().cartItems.find((cartItem) => cartItem.id === id),
+const useCartStore = create(
+  persist<CartState & CartActions>(
+    (set, get) => ({
+      ...cartInitialState,
 
-  addItemToCart: (item) => {
-    const itemExist = get().itemExist(item.id);
+      itemExist: (id) => get().cartItems.find((cartItem) => cartItem.id === id),
 
-    if (itemExist) {
-      itemExist.quantity++;
-    } else {
-      set({ cartItems: [...get().cartItems, { ...item, quantity: 1 }] });
-    }
-  },
+      addItemToCart: (item) => {
+        const itemExist = get().itemExist(item.id);
 
-  increaseQuantity: (productId) => {
-    const itemExist = get().itemExist(productId);
+        if (itemExist) {
+          itemExist.quantity++;
+        } else {
+          set({ cartItems: [...get().cartItems, { ...item, quantity: 1 }] });
+        }
+      },
 
-    if (itemExist) {
-      itemExist.quantity++;
-      set({ cartItems: updatedCartItems(get().cartItems, itemExist) });
-    }
-  },
+      increaseQuantity: (productId) => {
+        const itemExist = get().itemExist(productId);
 
-  decreaseQuantity: (productId) => {
-    const itemExist = get().itemExist(productId);
+        if (itemExist) {
+          itemExist.quantity++;
+          set({ cartItems: updatedCartItems(get().cartItems, itemExist) });
+        }
+      },
 
-    if (itemExist && itemExist.quantity > 0) {
-      itemExist.quantity--;
-      if (itemExist.quantity === 0) {
-        const updatedCartItems = get().cartItems.filter((item) => item.id !== productId);
-        set({ cartItems: updatedCartItems });
-      } else {
-        set({ cartItems: updatedCartItems(get().cartItems, itemExist) });
-      }
-    }
-  },
+      decreaseQuantity: (productId) => {
+        const itemExist = get().itemExist(productId);
 
-  removeItemFromCart: (productId) => {
-    const itemExist = get().itemExist(productId);
+        if (itemExist && itemExist.quantity > 0) {
+          itemExist.quantity--;
+          if (itemExist.quantity === 0) {
+            const updatedCartItems = get().cartItems.filter((item) => item.id !== productId);
+            set({ cartItems: updatedCartItems });
+          } else {
+            set({ cartItems: updatedCartItems(get().cartItems, itemExist) });
+          }
+        }
+      },
 
-    if (itemExist) {
-      const updatedCartItems = get().cartItems.filter((item) => item.id !== productId);
-      set({ cartItems: updatedCartItems });
-    }
-  },
-}));
+      removeItemFromCart: (productId) => {
+        const itemExist = get().itemExist(productId);
+
+        if (itemExist) {
+          const updatedCartItems = get().cartItems.filter((item) => item.id !== productId);
+          set({ cartItems: updatedCartItems });
+        }
+      },
+
+      getProductQuantity: (productId) => {
+        const itemExist = get().itemExist(productId);
+
+        if (itemExist) {
+          return itemExist.quantity;
+        }
+
+        return 1;
+      },
+
+      totalAmount: () => {
+        const total = get().cartItems.reduce((acc, cur) => {
+          acc += cur.price * cur.quantity;
+          return acc;
+        }, 0);
+
+        return total;
+      },
+
+      clearCart: () => {
+        set(cartInitialState);
+      },
+    }),
+    { name: 'cart-items' },
+  ),
+);
 
 export default useCartStore;

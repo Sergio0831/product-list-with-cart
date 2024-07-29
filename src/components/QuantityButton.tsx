@@ -9,7 +9,7 @@ export interface QuantityButtonProps extends React.ComponentPropsWithoutRef<'div
 }
 
 const QuantityButton = ({ productId, className, ...props }: QuantityButtonProps) => {
-  const { increaseQuantity, decreaseQuantity } = useCartStore();
+  const { increaseQuantity, decreaseQuantity, getProductQuantity } = useCartStore();
 
   return (
     <div
@@ -25,7 +25,7 @@ const QuantityButton = ({ productId, className, ...props }: QuantityButtonProps)
         onClick={() => decreaseQuantity(productId)}>
         <Decrement />
       </Button>
-      1
+      {getProductQuantity(productId)}
       <Button
         variant="icon"
         size="icon"

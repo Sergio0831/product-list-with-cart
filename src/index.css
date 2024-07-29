@@ -17,6 +17,7 @@
 
     /* Colors */
     --black: hsl(0, 0%, 0%);
+    --black-50: hsl(0, 0%, 0%, 50%);
     --white: hsl(0, 0%, 100%);
     --red: hsl(14, 86%, 42%);
     --dark-red: hsl(14, 86%, 31%);

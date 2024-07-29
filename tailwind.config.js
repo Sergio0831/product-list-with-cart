@@ -8,6 +8,7 @@ export default {
     colors: {
       white: 'var(--white)',
       black: 'var(--black)',
+      'black-50': 'var(--black-50)',
       red: 'var(--red)',
       'dark-red': 'var(--dark-red)',
       green: 'var(--green)',
@@ -24,5 +25,5 @@ export default {
     },
     extend: {},
   },
-  plugins: [],
+  plugins: [require('tailwindcss-animate')],
 };

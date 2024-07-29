@@ -1,11 +1,12 @@
 import toast from 'react-hot-toast';
 import { cn } from '../lib/utils';
-import useCartStore, { CartProductTypes } from '../store/cart';
+import useCartStore from '../store/cart';
 import Button from './Button';
 import RemoveItem from './Icons/RemoveItem';
+import { CartProductTypes } from '../types';
 
 export interface CartProductProps extends Omit<React.ComponentPropsWithoutRef<'div'>, 'id'> {
-  product: CartProductTypes;
+  product: Omit<CartProductTypes, 'thumbnail'>;
 }
 
 const CartProduct = ({ product, className }: CartProductProps) => {
@@ -28,7 +29,9 @@ const CartProduct = ({ product, className }: CartProductProps) => {
         <div className="flex gap-x-2 items-center">
           <span className="text-preset-4-bold text-red">{quantity}x</span>
           <span className="text-preset-4 text-rose-500">&#64; &euro;{price.toFixed(2)}</span>
-          <span className="text-preset-4-bold text-rose-500">&euro;{price.toFixed(2)}</span>
+          <span className="text-preset-4-bold text-rose-500">
+            &euro;{(price * quantity).toFixed(2)}
+          </span>
         </div>
       </div>
       <Button
