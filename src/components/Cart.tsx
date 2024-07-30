@@ -1,13 +1,11 @@
 import { cn } from '../lib/utils';
 import useCartStore from '../store/cart';
-import Button from './Button';
 import CartEmpty from './CartEmpty';
 import CartProduct from './CartProduct';
 import CartTotal from './CartTotal';
-import { Modal, ModalContent, ModalTrigger } from './Modal';
 import CarbonNeutral from './Icons/CarbonNeutral';
 import List from './List';
-import ModalProduct from './ModalProduct';
+import ModalOrDrawer from './ModalOrDrawer';
 
 export interface CartProps extends React.ComponentPropsWithoutRef<'div'> {}
 
@@ -31,24 +29,7 @@ const Cart = ({ className, ...props }: CartProps) => {
                 delivery
               </p>
             </div>
-            <Modal>
-              <ModalTrigger asChild>
-                <Button>Confirm Order</Button>
-              </ModalTrigger>
-              <ModalContent
-                title="Order Confirmed"
-                description="We hope you enjoy your food!"
-                closeBtnTitle="Start New Order"
-                clearCart={clearCart}>
-                <div className="grid gap-y-6 bg-rose-50 rounded-lg p-6">
-                  <List
-                    items={cartItems}
-                    renderItem={(product) => <ModalProduct product={product} />}
-                  />
-                  <CartTotal totalAmount={totalAmount()} />
-                </div>
-              </ModalContent>
-            </Modal>
+            <ModalOrDrawer cartItems={cartItems} clearCart={clearCart} totalAmount={totalAmount} />
           </>
         )}
       </>

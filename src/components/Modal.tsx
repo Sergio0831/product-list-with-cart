@@ -7,6 +7,8 @@ import Confirmed from './Icons/Confirmed';
 const Modal = DialogPrimitive.Root;
 const ModalTrigger = DialogPrimitive.Trigger;
 const ModalPortal = DialogPrimitive.Portal;
+const ModalTitle = DialogPrimitive.Title;
+const ModalDescription = DialogPrimitive.Description;
 const ModalClose = DialogPrimitive.Close;
 
 const ModalOverlay = React.forwardRef<
@@ -48,20 +50,18 @@ const ModalContent = ({
       <div className="grid gap-y-6">
         <Confirmed />
         <div>
-          <DialogPrimitive.Title className="text-preset-1 text-rose-900 mb-2">
-            {title}
-          </DialogPrimitive.Title>
-          <DialogPrimitive.Description className="text-rose-500">
-            {description}
-          </DialogPrimitive.Description>
+          <ModalTitle className="text-preset-1 text-rose-900 mb-2">{title}</ModalTitle>
+          <ModalDescription className="text-rose-500">{description}</ModalDescription>
         </div>
       </div>
       {children}
-      <ModalClose onClick={() => clearCart()} asChild>
-        <Button>{closeBtnTitle}</Button>
+      <ModalClose asChild>
+        <Button onClick={() => clearCart()} arai-label={closeBtnTitle}>
+          {closeBtnTitle}
+        </Button>
       </ModalClose>
     </DialogPrimitive.Content>
   </ModalPortal>
 );
 
-export { Modal, ModalPortal, ModalOverlay, ModalTrigger, ModalClose, ModalContent };
+export { Modal, ModalTrigger, ModalContent };
