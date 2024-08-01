@@ -1,6 +1,11 @@
 import { Toaster } from 'react-hot-toast';
-import { Cart, List, Product, Wrapper } from './components';
 import products from './data/products.json';
+import { lazy, Suspense } from 'react';
+import { Wrapper } from './components';
+
+const Cart = lazy(() => import('./components/Cart'));
+const List = lazy(() => import('./components/List'));
+const Product = lazy(() => import('./components/Product'));
 
 function App() {
   return (
@@ -19,15 +24,17 @@ function App() {
         }}
       />
       <Wrapper className="py-6 sm:py-10 md:py-20">
-        <section className="col-span-full sm:col-span-8 md:col-span-7 lg:col-span-8">
-          <h1 className="text-preset-1 mb-8">Desserts</h1>
-          <List
-            items={products}
-            renderItem={(product) => <Product product={product} />}
-            className="sm:grid-cols-2 lg:grid-cols-3 gap-y-8 gap-x-6"
-          />
-        </section>
-        <Cart className="col-span-full md:col-span-5 lg:col-span-4" />
+        <Suspense fallback={<div>Loading...</div>}>
+          <section className="col-span-full sm:col-span-8 md:col-span-7 lg:col-span-8">
+            <h1 className="text-preset-1 mb-8">Desserts</h1>
+            <List
+              items={products}
+              renderItem={(product) => <Product product={product} />}
+              className="sm:grid-cols-2 lg:grid-cols-3 gap-y-8 gap-x-6"
+            />
+          </section>
+          <Cart className="col-span-full md:col-span-5 lg:col-span-4" />
+        </Suspense>
       </Wrapper>
     </>
   );

@@ -1,5 +1,7 @@
+import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { cn } from '../lib/utils';
 import { CartProductTypes } from '../types';
+import 'react-lazy-load-image-component/src/effects/blur.css';
 
 export interface ModalProductProps extends Omit<React.ComponentPropsWithoutRef<'div'>, 'id'> {
   product: CartProductTypes;
@@ -15,7 +17,23 @@ const ModalProduct = ({ product, className }: ModalProductProps) => {
         className,
       )}>
       <div className="flex items-center gap-x-4">
-        <img className="w-12 h-12 rounded-[4px]" src={thumbnail} alt={name} loading="lazy" />
+        <LazyLoadImage
+          className="w-12 h-12 rounded-[4px]"
+          src={thumbnail}
+          alt={name}
+          effect="blur"
+          placeholderSrc={thumbnail}
+          width={48}
+          height={48}
+        />
+        {/* <img
+          className="w-12 h-12 rounded-[4px]"
+          src={thumbnail}
+          alt={name}
+          loading="lazy"
+          width={100}
+          height={96}
+        /> */}
         <div>
           <h3 className="text-preset-4-bold text-rose-900 mb-2">{name}</h3>
           <div className="flex gap-x-2 items-center">
