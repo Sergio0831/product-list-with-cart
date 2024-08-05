@@ -4,6 +4,7 @@ import { lazy, Suspense } from 'react';
 import { Wrapper } from './components';
 import { ProductTypes } from './types';
 import { ListProps } from './components/List';
+import Loader from './components/Loader';
 
 const Cart = lazy(() => import('./components/Cart'));
 const List = lazy(() => import('./components/List')) as React.FC<ListProps<ProductTypes>>;
@@ -26,7 +27,7 @@ function App() {
         }}
       />
       <Wrapper className="py-6 sm:py-10 md:py-20">
-        <Suspense fallback={<div>Loading...</div>}>
+        <Suspense fallback={<Loader className="col-span-full" />}>
           <section className="col-span-full sm:col-span-8 md:col-span-7 lg:col-span-8">
             <h1 className="text-preset-1 mb-8">Desserts</h1>
             <List

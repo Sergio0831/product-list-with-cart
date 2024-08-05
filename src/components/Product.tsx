@@ -6,8 +6,6 @@ import AddToCart from './Icons/AddToCart';
 import QuantityButton from './QuantityButton';
 import { ProductTypes } from '../types';
 
-import 'react-lazy-load-image-component/src/effects/blur.css';
-
 export interface ProductProps extends Omit<React.ComponentPropsWithoutRef<'article'>, 'id'> {
   product: ProductTypes;
 }
@@ -36,7 +34,6 @@ const Product = ({ product, className }: ProductProps) => {
         <source srcSet={image.tablet} media="(min-width: 640px)" />
         <img src={image.mobile} alt={name} className="rounded-lg w-full" width={502} height={408} />
       </picture>
-
       {itemExist(id) ? (
         <QuantityButton productId={id} className="w-40 gap-x-2 justify-self-center -mt-6 mb-4" />
       ) : (

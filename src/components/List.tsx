@@ -6,7 +6,7 @@ export interface ListProps<T> extends ComponentPropsWithoutRef<'ul'> {
   renderItem: (item: T) => React.ReactNode;
 }
 
-const List = <T extends object>({ items, renderItem, className }: ListProps<T>) => {
+function List<T extends object>({ items, renderItem, className }: ListProps<T>) {
   return (
     <ul className={cn('grid', className)}>
       {items.map((item, i) => (
@@ -14,6 +14,6 @@ const List = <T extends object>({ items, renderItem, className }: ListProps<T>) 
       ))}
     </ul>
   );
-};
+}
 
 export default List;

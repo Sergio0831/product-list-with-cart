@@ -26,14 +26,6 @@ const ModalProduct = ({ product, className }: ModalProductProps) => {
           width={48}
           height={48}
         />
-        {/* <img
-          className="w-12 h-12 rounded-[4px]"
-          src={thumbnail}
-          alt={name}
-          loading="lazy"
-          width={100}
-          height={96}
-        /> */}
         <div>
           <h3 className="text-preset-4-bold text-rose-900 mb-2">{name}</h3>
           <div className="flex gap-x-2 items-center">
