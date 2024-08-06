@@ -6,6 +6,7 @@ export default {
       center: true,
     },
     colors: {
+      transparent: 'var(--transparent)',
       white: 'var(--white)',
       black: 'var(--black)',
       'black-50': 'var(--black-50)',

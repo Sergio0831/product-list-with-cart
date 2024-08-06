@@ -32,7 +32,16 @@ const Product = ({ product, className }: ProductProps) => {
       <picture>
         <source srcSet={image.desktop} media="(min-width: 768px)" />
         <source srcSet={image.tablet} media="(min-width: 640px)" />
-        <img src={image.mobile} alt={name} className="rounded-lg w-full" width={502} height={408} />
+        <img
+          src={image.mobile}
+          alt={name}
+          className={cn(
+            'rounded-lg w-full transition-colors border-2 border-transparent',
+            itemExist(id) && 'border-red',
+          )}
+          width={502}
+          height={408}
+        />
       </picture>
       {itemExist(id) ? (
         <QuantityButton productId={id} className="w-40 gap-x-2 justify-self-center -mt-6 mb-4" />

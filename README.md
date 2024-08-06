@@ -15,7 +15,6 @@ Frontend Mentor challenges help me improve my coding skills by building realisti
   - [What I learned](#what-i-learned)
   - [Continued development](#continued-development)
 - [Author](#author)
-- [Acknowledgments](#acknowledgments)
 
 ## Overview
 
@@ -47,34 +46,37 @@ Users should be able to:
 - Flexbox
 - CSS Grid
 - Mobile-first workflow
-- [React](https://reactjs.org/) - JS library
-- [React](https://reactjs.org/) - JS library
-- [Next.js](https://nextjs.org/) - React framework
-- [Styled Components](https://styled-components.com/) - For styles
+- [React](https://react.dev) - JS library
+- [TypeScript](https://reactjs.org/) - Type Checking
+- [Taiwindcss](https://tailwindcss.com) - For styles
+- [Zustand](https://docs.pmnd.rs/zustand/getting-started/introduction) - State Management
 
 ### What I learned
 
-Use this section to recap over some of your major learnings while working through this project.
-Writing these out and providing code samples of areas you want to highlight is a great way to
-reinforce your own knowledge.
+This project was my first experience using Zustand for state management. Zustand is a lightweight
+and intuitive state-management library for React applications. It simplifies state management
+compared to more complex solutions like Redux.
 
 ### Continued development
 
-Use this section to outline areas that you want to continue focusing on in future projects. These
-could be concepts you're still not completely comfortable with or techniques you found useful that
-you want to refine and perfect.
+Moving forward, there are several areas I plan to focus on to enhance my skills and improve the
+project:
 
-**Note: Delete this note and the content within this section and replace with your own plans for
-continued development.**
+1. Advanced Zustand Patterns
+
+- Selectors and Computed States: Explore using selectors for more efficient state access and
+  computed states to derive values from the store.
+- Middleware: Implement middleware for logging, persistence, and other side effects.
+
+2. Testing
+
+- Unit Testing: Write unit tests for the Zustand store to ensure state management logic is robust
+  and error-free.
+- Integration Testing: Conduct integration tests to verify the interaction between components and
+  the Zustand store.
 
 ## Author
 
 - Website - [Sergejs Ivcenko](https://sergejs-ivcenko.netlify.app)
 - Frontend Mentor - [@Sergio0831](https://www.frontendmentor.io/profile/Sergio0831)
 - GitHub - [Sergio0831](https://github.com/Sergio0831)
-
-## Acknowledgments
-
-This is where you can give a hat tip to anyone who helped you out on this project. Perhaps you
-worked in a team or got some inspiration from someone else's solution. This is the perfect place to
-give them some credit.
